@@ -17,6 +17,9 @@
     * submit a `pull request` which compares Zipcoder `master` to your `master`.
 3. DO NOT CHANGE THE TEST OR THE ITEM CLASS
 
+# Levels
+This lab is divided into two levels. If you are 90% done with your labs or if you want to challenge yourself, get level2 with `git checkout level2` after you clone the repository. Otherwise, work on the master branch.
+
 # Part 1 - Original Description of the Gilded Rose
 
 Hi and welcome to team Gilded Rose. As you know, we are a small inn
