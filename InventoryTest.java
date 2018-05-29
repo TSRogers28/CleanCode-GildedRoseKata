@@ -107,4 +107,16 @@ public class InventoryTest {
 
         assertEquals(MAX_QUALITY, agedBrie.getQuality());
     }
+
+    @Test
+    public void testUpdate_WhenAgedBrieOnceTheSellInDatePassed() throws Exception {
+        Item agedBrie = new Item(AGED_BRIE_NAME, -1, 20);
+        int expectedQuality = agedBrie.getQuality() + 2;
+        Item[] items = {agedBrie};
+        Inventory sut = new Inventory(items);
+
+        sut.updateQuality();
+
+        assertEquals(expectedQuality, agedBrie.getQuality());
+    }
 }
