@@ -8,32 +8,24 @@ public class Inventory {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (!items[i].getName().equals("Aged Brie")) {
-                if (items[i].getQuality() > 0) {
-                    if (!items[i].getName().equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].setQuality(items[i].getQuality() - 1);
-                    }
-                }
-            } else {
-                if (items[i].getQuality() < 50) {
-                    items[i].setQuality(items[i].getQuality() + 1);
-                }
-            }
-
-            if (!items[i].getName().equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].setSellIn(items[i].getSellIn() - 1);
-            }
-
-            if (items[i].getSellIn() < 0) {
-                if (!items[i].getName().equals("Aged Brie")) {
-                  items[i].setQuality(items[i].getQuality() - 1);
-                } else {
-                    if (items[i].getQuality() < 50) {
-                        items[i].setQuality(items[i].getQuality() + 1);
-                    }
-                }
-            }
+        for (Item item : items) {
+            String name = item.getName();
+            int currentQ = item.getQuality();
+            int currentS = item.getSellIn();
+            if(currentQ >0 && currentQ<50)
+                setQuality(name, item, currentQ, setSellIn(item, currentS, name));
         }
-}
+    }
+    public int setSellIn(Item item, int previousS, String name){
+        int newS = previousS -1;
+        item.setSellIn(newS);
+        int adjustment = (newS <= 0 || name.equals("Conjured"))? 2 : 1;
+        return adjustment;
+    }
+    public void setQuality(String name,Item item, int previousQ, int SellInAdjustment){
+        if(name.equals("Aged Brie"))
+            item.setQuality(previousQ + SellInAdjustment);
+        else
+            item.setQuality(previousQ - SellInAdjustment);
+    }
 }

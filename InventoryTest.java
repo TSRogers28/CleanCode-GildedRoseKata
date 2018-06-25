@@ -11,11 +11,13 @@ public class InventoryTest {
 
     private Item sulfuras;
     private Item normalItem;
+    private Item conjuredItem;
 
     @Before
     public void setup(){
         sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 80);
         normalItem = new Item(NORMAL_ITEM_NAME, 10, 20);
+        conjuredItem = new Item("Conjured", 10, 20);
     }
 
     @Test
@@ -49,6 +51,16 @@ public class InventoryTest {
 
         assertEquals(expectedSellIn, normalItem.getSellIn());
     }
+    @Test
+    public void testUpdate_ForConjuredItemQuantity() throws Exception {
+        int expectedQuality = conjuredItem.getQuality() - 2;
+        Item[] items = {conjuredItem};
+        Inventory sut = new Inventory(items);
+
+        sut.updateQuality();
+
+        assertEquals(expectedQuality, conjuredItem.getQuality());
+    }
 
     @Test
     public void testUpdate_ForNormalItemQuantity() throws Exception {
@@ -60,6 +72,8 @@ public class InventoryTest {
 
         assertEquals(expectedQuality, normalItem.getQuality());
     }
+    
+    
 
     @Test
     public void testUpdate_ForSoldOutItem() throws Exception {
